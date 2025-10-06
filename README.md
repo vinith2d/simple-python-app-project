@@ -1,1 +1,0 @@
-# simple-python-app-project
