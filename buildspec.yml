@@ -14,14 +14,13 @@ phases:
   pre_build:
     commands:
       - echo "Installing dependencies..."
-      - pip install -r CICD-Project/requirements.txt 
+      - pip install -r requirements.txt
       - echo "Logging in to Docker..."
       - echo "$DOCKER_REGISTRY_PASSWORD" | docker login -u "$DOCKER_REGISTRY_USERNAME" --password-stdin "$DOCKER_REGISTRY_URL"
 
   build:
     commands:
       - echo "Running tests..."
-      - cd CICD-Project/
       - echo "Building Docker image..."
       - docker build -t "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest" .
       - docker push "$DOCKER_REGISTRY_URL/$DOCKER_REGISTRY_USERNAME/simple-python-flask-app:latest"
@@ -33,4 +32,4 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: ../simple-python-app-project
+  base-directory: .
